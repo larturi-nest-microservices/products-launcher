@@ -1,0 +1,86 @@
+version: '3.9'
+
+services:
+  # NATS Service
+  nats-server:
+    image: nats:2.10.14
+
+  # Client Api Gateway
+  client-gateway:
+    build:
+      context: ./client-gateway
+      dockerfile: Dockerfile.prod
+    image: client-gateway-prod
+    ports:
+      - ${CLIENT_GATEWAY_PORT}:${CLIENT_GATEWAY_PORT}
+    environment:
+      - PORT=${CLIENT_GATEWAY_PORT}
+      - NATS_SERVERS=${NATS_SERVER_URL}
+
+  # # Auth Microservice
+  # auth-ms:
+  #   build: ./auth-microservice
+  #   ports: 
+  #     - ${AUTH_MICROSERVICE_PORT}:${AUTH_MICROSERVICE_PORT}
+  #   volumes: 
+  #     - ./auth-microservice/src:/usr/src/app/src
+  #   command: npm run start:dev
+  #   environment:
+  #     - PORT=${AUTH_MICROSERVICE_PORT}
+  #     - NATS_SERVERS=${NATS_SERVER_URL}
+  #     - DATABASE_URL=${DATABASE_URL}
+  #     - JWT_SECRET=${JWT_SECRET}
+
+  # # Products Microsercice
+  # products-ms:
+  #   build: ./products-microservice
+  #   volumes: 
+  #     - ./products-microservice/src:/usr/src/app/src
+  #   command: npm run start:dev
+  #   environment:
+  #     - PORT=3001
+  #     - DATABASE_URL=file:./dev.db
+  #     - NATS_SERVERS=${NATS_SERVER_URL}
+
+  # # Orders Microsercice
+  # orders-ms:
+  #   depends_on:
+  #     - orders-db
+  #   build: ./orders-microservice
+  #   volumes:
+  #     - ./orders-microservice/src:/usr/src/app/src
+  #   command: npm run start:dev
+  #   environment:
+  #     - PORT=3002
+  #     - DATABASE_URL=${ORDERS_DB_CONNECT_URL}
+  #     - NATS_SERVERS=${NATS_SERVER_URL}
+
+  # # Orders Postgres Database
+  # orders-db:
+  #   container_name: orders_database
+  #   image: postgres:16.2
+  #   restart: always
+  #   volumes:
+  #     - ./orders-microservice/postgres:/var/lib/postgresql/data
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     - POSTGRES_USER=${ORDERS_DB_POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${ORDERS_DB_POSTGRES_PASSWORD}
+  #     - POSTGRES_DB=${ORDERS_DB_POSTGRES_DB}
+
+  # # Payments Microservice
+  # payments-ms:
+  #   build: ./payments-microservice
+  #   ports: 
+  #     - ${PAYMENT_MS_PORT}:${PAYMENT_MS_PORT}
+  #   volumes: 
+  #     - ./payments-microservice/src:/usr/src/app/src
+  #   command: npm run start:dev
+  #   environment:
+  #     - PORT=${PAYMENT_MS_PORT}
+  #     - NATS_SERVERS=${NATS_SERVER_URL}
+  #     - STRIPE_SECRET=${STRIPE_SECRET}
+  #     - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
+  #     - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
+  #     - STRIPE_ENDPOINT_SECRET=${STRIPE_ENDPOINT_SECRET}

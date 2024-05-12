@@ -65,7 +65,6 @@ Edit the webhook endpoint URL in Stripe / Developers / Webhooks
 
 - Credit Card Test: 4242 4242 4242 4242
 
-
 ## En caso de problemas con los submodulos de git
 
 ```bash
@@ -76,4 +75,14 @@ git submodule add https://github.com/larturi-nest-microservices/orders-microserv
 git submodule add https://github.com/larturi-nest-microservices/payments-microservice.git
 git submodule add https://github.com/larturi-nest-microservices/auth-microservice.git
 git submodule add https://github.com/larturi-nest-microservices/client-gateway.git
+```
+
+## Para correr en Prod
+
+1. Clonar el repositorio
+2. Crear un .env basado en el .env.template
+3. Ejecutar el comando:
+
+```bash
+docker compose -f docker-compose.prod.yaml build
 ```
