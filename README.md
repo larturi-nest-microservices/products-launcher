@@ -15,12 +15,6 @@
 
 ```bash
 git submodule add <repository_url> <directory_name>
-
-git submodule add https://github.com/larturi-nest-microservices/products-microservice.git
-git submodule add https://github.com/larturi-nest-microservices/orders-microservice.git
-git submodule add https://github.com/larturi-nest-microservices/payments-microservice.git
-git submodule add https://github.com/larturi-nest-microservices/auth-microservice.git
-git submodule add https://github.com/larturi-nest-microservices/client-gateway.git
 ```
 
 1. Añadir los cambios al repositorio (git add, git commit, git push) Ej:
@@ -70,3 +64,16 @@ Edit the webhook endpoint URL in Stripe / Developers / Webhooks
 - <https://dashboard.stripe.com/test/webhooks>
 
 - Credit Card Test: 4242 4242 4242 4242
+
+
+## En caso de problemas con los submodulos de git
+
+```bash
+# Agregar uno por uno los submodulos
+
+git submodule add https://github.com/larturi-nest-microservices/products-microservice.git
+git submodule add https://github.com/larturi-nest-microservices/orders-microservice.git
+git submodule add https://github.com/larturi-nest-microservices/payments-microservice.git
+git submodule add https://github.com/larturi-nest-microservices/auth-microservice.git
+git submodule add https://github.com/larturi-nest-microservices/client-gateway.git
+```
