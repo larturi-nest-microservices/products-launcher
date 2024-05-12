@@ -15,9 +15,15 @@
 
 ```bash
 git submodule add <repository_url> <directory_name>
+
+git submodule add https://github.com/larturi-nest-microservices/products-microservice.git
+git submodule add https://github.com/larturi-nest-microservices/orders-microservice.git
+git submodule add https://github.com/larturi-nest-microservices/payments-microservice.git
+git submodule add https://github.com/larturi-nest-microservices/auth-microservice.git
+git submodule add https://github.com/larturi-nest-microservices/client-gateway.git
 ```
 
-4. Añadir los cambios al repositorio (git add, git commit, git push) Ej:
+1. Añadir los cambios al repositorio (git add, git commit, git push) Ej:
 
 ```bash
 git add .
