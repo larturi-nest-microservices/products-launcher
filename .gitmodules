@@ -1,0 +1,15 @@
+[submodule "client-gateway"]
+	path = client-gateway
+	url = https://github.com/larturi-nest-microservices/client-gateway.git
+[submodule "orders-microservice"]
+	path = orders-microservice
+	url = https://github.com/larturi-nest-microservices/orders-microservice.git
+[submodule "products-microservice"]
+	path = products-microservice
+	url = https://github.com/larturi-nest-microservices/products-microservice.git
+[submodule "payments-microservice"]
+	path = payments-microservice
+	url = https://github.com/larturi-nest-microservices/payments-microservice.git
+[submodule "auth-microservice"]
+	path = auth-microservice
+	url = https://github.com/larturi-nest-microservices/auth-microservice.git
