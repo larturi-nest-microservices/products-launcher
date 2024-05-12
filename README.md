@@ -63,4 +63,4 @@ Edit the webhook endpoint URL in Stripe / Developers / Webhooks
 
 - <https://dashboard.stripe.com/test/webhooks>
 
-- Credir Card Test: 4242 4242 4242 4242
+- Credit Card Test: 4242 4242 4242 4242
