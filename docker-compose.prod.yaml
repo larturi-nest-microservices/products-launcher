@@ -55,20 +55,6 @@ services:
       - DATABASE_URL=${ORDERS_DB_CONNECT_URL}
       - NATS_SERVERS=${NATS_SERVER_URL}
 
-  # # Orders Postgres Database
-  # orders-db:
-  #   container_name: orders_database
-  #   image: postgres:16.2
-  #   restart: always
-  #   volumes:
-  #     - ./orders-microservice/postgres:/var/lib/postgresql/data
-  #   ports:
-  #     - 5432:5432
-  #   environment:
-  #     - POSTGRES_USER=${ORDERS_DB_POSTGRES_USER}
-  #     - POSTGRES_PASSWORD=${ORDERS_DB_POSTGRES_PASSWORD}
-  #     - POSTGRES_DB=${ORDERS_DB_POSTGRES_DB}
-
   # Payments Microservice
   payments-ms:
     build:
