@@ -17,19 +17,19 @@ services:
       - PORT=${CLIENT_GATEWAY_PORT}
       - NATS_SERVERS=${NATS_SERVER_URL}
 
-  # # Auth Microservice
-  # auth-ms:
-  #   build: ./auth-microservice
-  #   ports: 
-  #     - ${AUTH_MICROSERVICE_PORT}:${AUTH_MICROSERVICE_PORT}
-  #   volumes: 
-  #     - ./auth-microservice/src:/usr/src/app/src
-  #   command: npm run start:dev
-  #   environment:
-  #     - PORT=${AUTH_MICROSERVICE_PORT}
-  #     - NATS_SERVERS=${NATS_SERVER_URL}
-  #     - DATABASE_URL=${DATABASE_URL}
-  #     - JWT_SECRET=${JWT_SECRET}
+  # Auth Microservice
+  auth-ms:
+    build:
+      context: ./auth-microservice
+      dockerfile: Dockerfile.prod
+    image: auth-microservice-prod
+    volumes: 
+      - ./auth-microservice/src:/usr/src/app/src
+    environment:
+      - PORT=3000
+      - NATS_SERVERS=${NATS_SERVER_URL}
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
 
   # # Products Microsercice
   # products-ms:
