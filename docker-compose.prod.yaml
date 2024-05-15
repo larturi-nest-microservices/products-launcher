@@ -31,16 +31,16 @@ services:
       - DATABASE_URL=${DATABASE_URL}
       - JWT_SECRET=${JWT_SECRET}
 
-  # # Products Microsercice
-  # products-ms:
-  #   build: ./products-microservice
-  #   volumes: 
-  #     - ./products-microservice/src:/usr/src/app/src
-  #   command: npm run start:dev
-  #   environment:
-  #     - PORT=3001
-  #     - DATABASE_URL=file:./dev.db
-  #     - NATS_SERVERS=${NATS_SERVER_URL}
+  # Products Microsercice
+  products-ms:
+    build:
+      context: ./products-microservice
+      dockerfile: Dockerfile.prod
+    image: products-microservice-prod
+    environment:
+      - PORT=3001
+      - DATABASE_URL=file:./dev.db
+      - NATS_SERVERS=${NATS_SERVER_URL}
 
   # # Orders Microsercice
   # orders-ms:
@@ -69,18 +69,18 @@ services:
   #     - POSTGRES_PASSWORD=${ORDERS_DB_POSTGRES_PASSWORD}
   #     - POSTGRES_DB=${ORDERS_DB_POSTGRES_DB}
 
-  # # Payments Microservice
-  # payments-ms:
-  #   build: ./payments-microservice
-  #   ports: 
-  #     - ${PAYMENT_MS_PORT}:${PAYMENT_MS_PORT}
-  #   volumes: 
-  #     - ./payments-microservice/src:/usr/src/app/src
-  #   command: npm run start:dev
-  #   environment:
-  #     - PORT=${PAYMENT_MS_PORT}
-  #     - NATS_SERVERS=${NATS_SERVER_URL}
-  #     - STRIPE_SECRET=${STRIPE_SECRET}
-  #     - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
-  #     - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
-  #     - STRIPE_ENDPOINT_SECRET=${STRIPE_ENDPOINT_SECRET}
+  # Payments Microservice
+  payments-ms:
+    build:
+      context: ./payments-microservice
+      dockerfile: Dockerfile.prod
+    image: payments-microservice-prod
+    ports: 
+      - ${PAYMENT_MS_PORT}:${PAYMENT_MS_PORT}
+    environment:
+      - PORT=${PAYMENT_MS_PORT}
+      - NATS_SERVERS=${NATS_SERVER_URL}
+      - STRIPE_SECRET=${STRIPE_SECRET}
+      - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
+      - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
+      - STRIPE_ENDPOINT_SECRET=${STRIPE_ENDPOINT_SECRET}
