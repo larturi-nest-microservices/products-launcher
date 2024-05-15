@@ -42,18 +42,18 @@ services:
       - DATABASE_URL=file:./dev.db
       - NATS_SERVERS=${NATS_SERVER_URL}
 
-  # # Orders Microsercice
-  # orders-ms:
-  #   depends_on:
-  #     - orders-db
-  #   build: ./orders-microservice
-  #   volumes:
-  #     - ./orders-microservice/src:/usr/src/app/src
-  #   command: npm run start:dev
-  #   environment:
-  #     - PORT=3002
-  #     - DATABASE_URL=${ORDERS_DB_CONNECT_URL}
-  #     - NATS_SERVERS=${NATS_SERVER_URL}
+  # Orders Microsercice
+  orders-ms:
+    build:
+      context: ./orders-microservice
+      dockerfile: Dockerfile.prod
+      args:
+        - ORDERS_DB_CONNECT_URL=${ORDERS_DB_CONNECT_URL}
+    image: orders-microservice-prod
+    environment:
+      - PORT=3000
+      - DATABASE_URL=${ORDERS_DB_CONNECT_URL}
+      - NATS_SERVERS=${NATS_SERVER_URL}
 
   # # Orders Postgres Database
   # orders-db:
