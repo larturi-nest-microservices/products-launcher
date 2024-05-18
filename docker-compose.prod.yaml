@@ -8,7 +8,7 @@ services:
     build:
       context: ./client-gateway
       dockerfile: Dockerfile.prod
-    image: client-gateway-prod
+    image: southamerica-west1-docker.pkg.dev/cogent-calling-423723-h9/image-registry/client-gateway
     ports:
       - ${CLIENT_GATEWAY_PORT}:${CLIENT_GATEWAY_PORT}
     environment:
@@ -20,7 +20,7 @@ services:
     build:
       context: ./auth-microservice
       dockerfile: Dockerfile.prod
-    image: auth-microservice-prod
+    image: southamerica-west1-docker.pkg.dev/cogent-calling-423723-h9/image-registry/auth-ms
     volumes: 
       - ./auth-microservice/src:/usr/src/app/src
     environment:
@@ -34,7 +34,7 @@ services:
     build:
       context: ./products-microservice
       dockerfile: Dockerfile.prod
-    image: products-microservice-prod
+    image: southamerica-west1-docker.pkg.dev/cogent-calling-423723-h9/image-registry/products-ms
     environment:
       - PORT=3001
       - DATABASE_URL=file:./dev.db
@@ -47,7 +47,7 @@ services:
       dockerfile: Dockerfile.prod
       args:
         - ORDERS_DB_CONNECT_URL=${ORDERS_DB_CONNECT_URL}
-    image: orders-microservice-prod
+    image: southamerica-west1-docker.pkg.dev/cogent-calling-423723-h9/image-registry/orders-ms
     environment:
       - PORT=3000
       - DATABASE_URL=${ORDERS_DB_CONNECT_URL}
@@ -58,7 +58,7 @@ services:
     build:
       context: ./payments-microservice
       dockerfile: Dockerfile.prod
-    image: payments-microservice-prod
+    image: southamerica-west1-docker.pkg.dev/cogent-calling-423723-h9/image-registry/payments-ms
     ports: 
       - ${PAYMENT_MS_PORT}:${PAYMENT_MS_PORT}
     environment:
