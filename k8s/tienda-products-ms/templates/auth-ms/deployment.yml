@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: auth-ms
+  name: auth-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-ms
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: auth-ms
+    spec:
+      containers:
+      - image: southamerica-west1-docker.pkg.dev/cogent-calling-423723-h9/image-registry/auth-ms
+        name: auth-ms
+        env:
+        - name: PORT
+          value:  "3000"
+        - name: NATS_SERVERS
+          value: "nats://nats"
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: auth-secret-jwt
+              key: jwt_secret
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: auth-secrets
+              key: database_url
+        resources: {}
+status: {}
