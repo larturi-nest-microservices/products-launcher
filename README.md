@@ -41,7 +41,7 @@ git submodule update --remote
 
 Si se trabaja en el repositorio que tiene los sub-módulos, primero actualizar y hacer push en el sub-módulo y después en el repositorio principal.
 
-Si se hace al revés, se perderán las referencias de los sub-módulos en el repositorio principal y tendremos que resolver conflictosl.
+Si se hace al revés, se perderán las referencias de los sub-módulos en el repositorio principal y tendremos que resolver conflictos.
 
 ## Diagrama Arquitectura
 
@@ -85,4 +85,10 @@ git submodule add https://github.com/larturi-nest-microservices/client-gateway.g
 
 ```bash
 docker compose -f docker-compose.prod.yaml build
+```
+
+Para subir al registro de Google Cloud
+
+```bash
+docker build -f dockerfile.prod -t southamerica-west1-docker.pkg.dev/cogent-calling-423723-h9/image-registry/orders-ms .
 ```
