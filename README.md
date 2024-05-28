@@ -7,7 +7,7 @@
 3. Ejecutar el comando `git submodule update --init --recursive` para reconstruir los sub-módulos
 4. Ejecutar el comando `docker compose up --build`
 
-## Pasos para crear los Git Submodules
+## Pasos para crear nuevos Git Submodules
 
 1. Crear un nuevo repositorio en GitHub
 2. Clonar el repositorio en la máquina local
@@ -77,9 +77,9 @@ git submodule add https://github.com/larturi-nest-microservices/auth-microservic
 git submodule add https://github.com/larturi-nest-microservices/client-gateway.git
 ```
 
-## Para correr en Prod
+## Para correr en Prod con Kubernetes y subir a GCP
 
-1. Clonar el repositorio
+1. Clonar el repositorio products-launcher
 2. Crear un .env basado en el .env.template
 3. Ejecutar el comando:
 
@@ -87,8 +87,41 @@ git submodule add https://github.com/larturi-nest-microservices/client-gateway.g
 docker compose -f docker-compose.prod.yaml build
 ```
 
-Para subir al registro de Google Cloud
+Para subir imagenes al registro de Google Cloud. Ejemplo con orders-microservice:
 
 ```bash
+cd orders-microservice
+
 docker build -f dockerfile.prod -t southamerica-west1-docker.pkg.dev/cogent-calling-423723-h9/image-registry/orders-ms .
 ```
+
+Mas info en `K8s.README.md`
+
+## Paso a paso para actualizar un servicio y llevarlo a PROD en GCP
+
+1. Una vez realizados los cambios en el repo del ms, hacer el push a la rama cloud-build se dispara el proceso de CI/CD siguiendo el script del archivo cloudbuild.yml de cada servicio.
+2. Una vez finalizado, se genera la nueva imagen de Docker y se sube en Artifact Registry de GCP.
+3. Con la imagen de Docker hosteada, desde local, parado en la carpeta `k8s/tienda-products-ms` actualizar el cluster con helm:
+
+```bash
+helm upgrade tienda-products-ms .
+```
+
+4. Para ver el estado de los pods:
+
+```bash
+kubectl get pods
+```
+
+5. Para ver los logs de un pod:
+
+```bash
+kubectl logs payments-ms-6fbc5d5bd6-6tcvf
+```
+
+## Servicios de Google Cloud
+
+- Artifact Registry
+- Cloud Build
+- Secret Manager
+  
