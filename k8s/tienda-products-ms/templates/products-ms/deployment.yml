@@ -27,5 +27,4 @@ spec:
           value: "nats://nats"
         - name: DATABASE_URL
           value:  "file:./dev.db"
-        resources: {}
 status: {}
